@@ -8,7 +8,7 @@ License-Url: http://www.gnu.org/copyleft/lesser.txt
 Vendor: Red Hat
 Cartridge-Version: 0.0.1
 Cartridge-Vendor: jboss
-Source-Url: https://github.com/pzapataf/openshift-cartridge-bpms.git
+Source-Url: https://github.com/jboss-bpms/openshift-cartridge-bpms.git
 Categories:
 - service
 - web_framework
