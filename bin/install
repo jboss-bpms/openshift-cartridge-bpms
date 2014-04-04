@@ -1,0 +1,144 @@
+#!/bin/bash -eu
+
+source $OPENSHIFT_BPMS_DIR/bin/util
+source $OPENSHIFT_CARTRIDGE_SDK_BASH
+
+case "$1" in
+  -v|--version)
+    version="$2"
+esac
+
+echo "$version" > "$OPENSHIFT_BPMS_DIR/env/OPENSHIFT_BPMS_VERSION"
+
+ln -s ${OPENSHIFT_BPMS_DIR}/standalone/log ${OPENSHIFT_BPMS_DIR}/logs
+
+shopt -s dotglob
+cp -r ${OPENSHIFT_BPMS_DIR}/versions/${version}/template/* ${OPENSHIFT_BPMS_DIR}/template
+
+##
+## Remove .git directory for space
+##
+rm -rf ${OPENSHIFT_BPMS_DIR}/.git
+
+mv ${OPENSHIFT_BPMS_DIR}/versions/${version}/share/* ${OPENSHIFT_BPMS_DIR}/share
+mv ${OPENSHIFT_BPMS_DIR}/versions/${version}/jboss/modules ${OPENSHIFT_BPMS_DIR}/jboss
+mv ${OPENSHIFT_BPMS_DIR}/versions/${version}/jboss/jboss-modules.jar ${OPENSHIFT_BPMS_DIR}/jboss
+cp ${OPENSHIFT_BPMS_DIR}/standalone/configuration/standalone.xml ${OPENSHIFT_BPMS_DIR}/template/.openshift/config
+##cp ${OPENSHIFT_BPMS_DIR}/versions/${version}/standalone/deployments/dashbuilder.war ${OPENSHIFT_BPMS_DIR}/standalone/deployments/dashbuilder.war
+##cp -R ${OPENSHIFT_BPMS_DIR}/versions/${version}/standalone/deployments/dashbuilder.war ${OPENSHIFT_BPMS_DIR}/standalone/deployments
+##cp -R ${OPENSHIFT_BPMS_DIR}/versions/${version}/standalone/deployments/business-central.war ${OPENSHIFT_BPMS_DIR}/standalone/deployments
+mv ${OPENSHIFT_BPMS_DIR}/versions/${version}/standalone/deployments/dashbuilder.war ${OPENSHIFT_BPMS_DIR}/standalone/deployments/
+mv ${OPENSHIFT_BPMS_DIR}/versions/${version}/standalone/deployments/business-central.war ${OPENSHIFT_BPMS_DIR}/standalone/deployments/
+cp ${OPENSHIFT_BPMS_DIR}/versions/${version}/standalone/deployments/dashbuilder.war.dodeploy ${OPENSHIFT_BPMS_DIR}/standalone/deployments
+cp ${OPENSHIFT_BPMS_DIR}/versions/${version}/standalone/deployments/business-central.war.dodeploy ${OPENSHIFT_BPMS_DIR}/standalone/deployments
+
+
+sed -i "s/{APP_NAME}/${OPENSHIFT_APP_NAME}/g" ${OPENSHIFT_BPMS_DIR}/template/pom.xml
+
+pushd $OPENSHIFT_BPMS_DIR/template/src/main/webapp
+  jar cvf $OPENSHIFT_BPMS_DIR/standalone/deployments/ROOT.war ./*
+popd
+
+JBOSS_HOME=${OPENSHIFT_BPMS_DIR}/jboss
+pushd $OPENSHIFT_BPMS_DIR > /dev/null
+  ln -s ${JBOSS_HOME}/jboss-modules.jar
+  ln -s ${JBOSS_HOME}/modules
+popd 1> /dev/null
+
+# Disable Openshift management
+set_env_var DISABLE_OPENSHIFT_MANAGED_SERVER_CONFIG true ~/.env/user_vars
+
+# Set usernames, generate passwords and create env variables
+echo 'Generating username and password'
+
+bpmadmin_username=bpm-admin
+bpmanalyst_username=bpm-analyst
+bpmdeveloper_username=bpm-developer
+bpmuser_username=bpm-user
+bpmmanager_username=bpm-manager
+root_username=root
+
+
+bpmadmin_password=$(generate_password)
+bpmanalyst_password=$(generate_password)
+bpmdeveloper_password=$(generate_password)
+bpmuser_password=$(generate_password)
+bpmmanager_password=$(generate_password)
+root_password=$(generate_password)
+
+# env vars
+#
+echo "$bpmadmin_username" > $OPENSHIFT_BPMS_DIR/env/OPENSHIFT_BPMS_BPMADMIN_USERNAME
+echo "$bpmadmin_password" > $OPENSHIFT_BPMS_DIR/env/OPENSHIFT_BPMS_BPMADMIN_PASSWORD
+
+echo "$bpmanalyst_username" > $OPENSHIFT_BPMS_DIR/env/OPENSHIFT_BPMS_BPANALYST_USERNAME
+echo "$bpmanalyst_password" > $OPENSHIFT_BPMS_DIR/env/OPENSHIFT_BPMS_BPANALYST_PASSWORD
+
+echo "$bpmdeveloper_username" > $OPENSHIFT_BPMS_DIR/env/OPENSHIFT_BPMS_BPMDEVELOPER_USERNAME
+echo "$bpmdeveloper_password" > $OPENSHIFT_BPMS_DIR/env/OPENSHIFT_BPMS_BPMDEVELOPER_PASSWORD
+
+echo "$bpmuser_username" > $OPENSHIFT_BPMS_DIR/env/OPENSHIFT_BPMS_BPMUSER_USERNAME
+echo "$bpmuser_password" > $OPENSHIFT_BPMS_DIR/env/OPENSHIFT_BPMS_BPMUSER_PASSWORD
+
+echo "$bpmmanager_username" > $OPENSHIFT_BPMS_DIR/env/OPENSHIFT_BPMS_BPMMANAGER_USERNAME
+echo "$bpmmanager_password" > $OPENSHIFT_BPMS_DIR/env/OPENSHIFT_BPMS_BPMMANAGER_PASSWORD
+
+echo "$root_username" > $OPENSHIFT_BPMS_DIR/env/OPENSHIFT_BPMS_ROOT_USERNAME
+echo "$root_password" > $OPENSHIFT_BPMS_DIR/env/OPENSHIFT_BPMS_ROOT_PASSWORD
+
+echo "$bpmdeveloper_username" > $OPENSHIFT_BPMS_DIR/env/OPENSHIFT_BPMS_BPMDEVELOPER_USERNAME
+echo "$bpmdeveloper_password" > $OPENSHIFT_BPMS_DIR/env/OPENSHIFT_BPMS_BPMDEVELOPER_PASSWORD
+
+# Create the bpms-security-users.properties file
+# ${OPENSHIFT_BPMS_DIR}/standalone/deployments
+echo "# username=password" > "${OPENSHIFT_BPMS_DIR}/standalone/configuration/bpms-users.properties"
+echo "${bpmadmin_username}=${bpmadmin_password}" >> "${OPENSHIFT_BPMS_DIR}/standalone/configuration/bpms-users.properties"
+echo "${bpmanalyst_username}=${bpmanalyst_password}" >> "${OPENSHIFT_BPMS_DIR}/standalone/configuration/bpms-users.properties"
+echo "${bpmdeveloper_username}=${bpmdeveloper_password}" >> "${OPENSHIFT_BPMS_DIR}/standalone/configuration/bpms-users.properties"
+echo "${bpmuser_username}=${bpmuser_password}" >> "${OPENSHIFT_BPMS_DIR}/standalone/configuration/bpms-users.properties"
+echo "${bpmmanager_username}=${bpmmanager_password}" >> "${OPENSHIFT_BPMS_DIR}/standalone/configuration/bpms-users.properties"
+echo "${root_username}=${root_password}" >> "${OPENSHIFT_BPMS_DIR}/standalone/configuration/bpms-users.properties"
+echo "${bpmdeveloper_username}=${bpmdeveloper_password}" >> "${OPENSHIFT_BPMS_DIR}/standalone/configuration/bpms-users.properties"
+
+
+# Create the bpms-security-roles.properties file
+#
+echo "# username=role1,role2" > "${OPENSHIFT_BPMS_DIR}/standalone/configuration/bpms-roles.properties"
+echo "${bpmadmin_username}=admin" >> "${OPENSHIFT_BPMS_DIR}/standalone/configuration/bpms-roles.properties"
+echo "${bpmanalyst_username}=analyst" >> "${OPENSHIFT_BPMS_DIR}/standalone/configuration/bpms-roles.properties"
+echo "${bpmdeveloper_username}=developer" >> "${OPENSHIFT_BPMS_DIR}/standalone/configuration/bpms-roles.properties"
+echo "${bpmuser_username}=user" >> "${OPENSHIFT_BPMS_DIR}/standalone/configuration/bpms-roles.properties"
+echo "${bpmmanager_username}=managager" >> "${OPENSHIFT_BPMS_DIR}/standalone/configuration/bpms-roles.properties"
+echo "${root_username}=admin" >> "${OPENSHIFT_BPMS_DIR}/standalone/configuration/bpms-roles.properties"
+
+
+
+
+client_result ""
+client_result "Red Hat JBoss BPM Suite ${version} cartridge installed.  Please make note of these credentials:"
+client_result ""
+client_result "              BPMS Admin User: $bpmadmin_username"
+client_result "     BPMS Admin Password: $bpmadmin_password"
+client_result ""
+client_result "              BPMS Analyst User: $bpmanalyst_username"
+client_result "     BPMS Analyst Password: $bpmanalyst_password"
+client_result ""
+client_result "              BPMS Developer User: $bpmdeveloper_username"
+client_result "     BPMS Developer Password: $bpmdeveloper_password"
+client_result ""
+client_result "              BPMS User User: $bpmuser_username"
+client_result "     BPMS User Password: $bpmuser_password"
+client_result ""
+client_result "              BPMS Manager User: $bpmmanager_username"
+client_result "     BPMS Manager Password: $bpmmanager_password"
+client_result ""
+client_result "              BPMS Root User: $root_username"
+client_result "     BPMS Root Password: $root_password"
+client_result ""
+
+
+
+touch ${OPENSHIFT_BPMS_DIR}/env/OPENSHIFT_BPMS_CLUSTER
+touch ${OPENSHIFT_BPMS_DIR}/env/OPENSHIFT_BPMS_CLUSTER_REMOTING
+
+update-configuration java7
