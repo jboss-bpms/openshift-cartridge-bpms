@@ -11,11 +11,11 @@
   <name>Red Hat JBoss BPM Suite Cartridge</name>
   <description>RedHat JBoss BPM Suite cartridge for OpenShift</description>
   <properties>
+    <!-- TODO: Current version used is 6.0.1.GA, that is not available at this server. -->
     <bpms-archive-url>http://dev138.mw.lab.eng.bos.redhat.com</bpms-archive-url>
     <bpms-archive-name>jboss-bpms-6.0.1.GA-redhat-3-deployable-eap6.x.zip</bpms-archive-name>    
     <bpms-archive-path>candidate/bpms-6.0.1.CR1/${bpms-archive-name}</bpms-archive-path>
-    <bpms-version-target>6.0.1</bpms-version-target>
-  </properties>
+    <bpms-version-target>6.0.1</bpms-version-target>  </properties>
   <scm>
     <connection>scm:git:git://github.com:pzapataf/openshift-cartridge-bpms.git</connection>
     <developerConnection>scm:git:git@github.com:pzapataf/openshift-cartridge-bpms.git</developerConnection>
@@ -57,6 +57,9 @@
 	      <includes>
 	        <include>jboss/**</include>
 	      </includes>
+              <excludes>
+	        <exclude>jboss/modules/system/layers/base/**</exclude>
+	      </excludes>
 	      <followSymlinks>false</followSymlinks>
             </fileset>
 	    </filesets>
