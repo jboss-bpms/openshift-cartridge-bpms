@@ -60,6 +60,9 @@
               <excludes>
 	        <exclude>jboss/modules/system/layers/base/**</exclude>
 	      </excludes>
+	      <excludes>
+	        <exclude>jboss/jboss-modules.jar</exclude>
+	      </excludes>
 	      <followSymlinks>false</followSymlinks>
             </fileset>
 	    </filesets>
