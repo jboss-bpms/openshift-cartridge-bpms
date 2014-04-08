@@ -57,6 +57,7 @@ bpmdeveloper_username=bpm-developer
 bpmuser_username=bpm-user
 bpmmanager_username=bpm-manager
 root_username=root
+loan_username=loan
 
 
 bpmadmin_password=$(generate_password)
@@ -65,6 +66,7 @@ bpmdeveloper_password=$(generate_password)
 bpmuser_password=$(generate_password)
 bpmmanager_password=$(generate_password)
 root_password=$(generate_password)
+loan_password=$(generate_password)
 
 # env vars
 #
@@ -99,7 +101,7 @@ echo "${bpmuser_username}=${bpmuser_password}" >> "${OPENSHIFT_BPMS_DIR}/standal
 echo "${bpmmanager_username}=${bpmmanager_password}" >> "${OPENSHIFT_BPMS_DIR}/standalone/configuration/bpms-users.properties"
 echo "${root_username}=${root_password}" >> "${OPENSHIFT_BPMS_DIR}/standalone/configuration/bpms-users.properties"
 echo "${bpmdeveloper_username}=${bpmdeveloper_password}" >> "${OPENSHIFT_BPMS_DIR}/standalone/configuration/bpms-users.properties"
-
+echo "${loan_username}=${loan_password}" >> "${OPENSHIFT_BPMS_DIR}/standalone/configuration/bpms-users.properties"
 
 # Create the bpms-security-roles.properties file
 #
@@ -110,6 +112,7 @@ echo "${bpmdeveloper_username}=developer" >> "${OPENSHIFT_BPMS_DIR}/standalone/c
 echo "${bpmuser_username}=user" >> "${OPENSHIFT_BPMS_DIR}/standalone/configuration/bpms-roles.properties"
 echo "${bpmmanager_username}=managager" >> "${OPENSHIFT_BPMS_DIR}/standalone/configuration/bpms-roles.properties"
 echo "${root_username}=admin" >> "${OPENSHIFT_BPMS_DIR}/standalone/configuration/bpms-roles.properties"
+echo "${loan_username}=analyst,broker,manager" >> "${OPENSHIFT_BPMS_DIR}/standalone/configuration/bpms-roles.properties"
 
 
 echo "Installing samples..."
@@ -127,25 +130,27 @@ popd 1> /dev/null
 client_result ""
 client_result "Red Hat JBoss BPM Suite ${version} cartridge installed.  Please make note of these credentials:"
 client_result ""
-client_result "              BPMS Admin User: $bpmadmin_username"
-client_result "     BPMS Admin Password: $bpmadmin_password"
+client_result "             BPMS Admin User: $bpmadmin_username"
+client_result "                    Password: $bpmadmin_password"
 client_result ""
-client_result "              BPMS Analyst User: $bpmanalyst_username"
-client_result "     BPMS Analyst Password: $bpmanalyst_password"
+client_result "           BPMS Analyst User: $bpmanalyst_username"
+client_result "                    Password: $bpmanalyst_password"
 client_result ""
-client_result "              BPMS Developer User: $bpmdeveloper_username"
-client_result "     BPMS Developer Password: $bpmdeveloper_password"
+client_result "         BPMS Developer User: $bpmdeveloper_username"
+client_result "                    Password: $bpmdeveloper_password"
 client_result ""
 client_result "              BPMS User User: $bpmuser_username"
-client_result "     BPMS User Password: $bpmuser_password"
+client_result "                    Password: $bpmuser_password"
 client_result ""
-client_result "              BPMS Manager User: $bpmmanager_username"
-client_result "     BPMS Manager Password: $bpmmanager_password"
+client_result "           BPMS Manager User: $bpmmanager_username"
+client_result "       BPMS Manager Password: $bpmmanager_password"
 client_result ""
-client_result "              BPMS Root User: $root_username"
-client_result "     BPMS Root Password: $root_password"
+client_result "               BAM Root User: $root_username"
+client_result "                    Password: $root_password"
 client_result ""
-
+client_result "            BPM Example User: $loan_username"
+client_result "                    Password: $loan_password"
+client_result ""
 
 
 touch ${OPENSHIFT_BPMS_DIR}/env/OPENSHIFT_BPMS_CLUSTER
