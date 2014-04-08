@@ -112,7 +112,17 @@ echo "${bpmmanager_username}=managager" >> "${OPENSHIFT_BPMS_DIR}/standalone/con
 echo "${root_username}=admin" >> "${OPENSHIFT_BPMS_DIR}/standalone/configuration/bpms-roles.properties"
 
 
+echo "Installing samples..."
 
+# Move initial repositories to configuration 
+mv ${OPENSHIFT_BPMS_DIR}/versions/${version}/initial ${OPENSHIFT_BPMS_DIR}/standalone/configuration
+
+# Unzip initial repositories and delete zip files 
+pushd $OPENSHIFT_BPMS_DIR/standalone/configuration/initial > /dev/null
+  unzip *.zip
+  rm *.zip 
+  mv *.war ../../deployments/
+popd 1> /dev/null
 
 client_result ""
 client_result "Red Hat JBoss BPM Suite ${version} cartridge installed.  Please make note of these credentials:"
