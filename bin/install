@@ -112,7 +112,7 @@ echo "${bpmdeveloper_username}=developer" >> "${OPENSHIFT_BPMS_DIR}/standalone/c
 echo "${bpmuser_username}=user" >> "${OPENSHIFT_BPMS_DIR}/standalone/configuration/bpms-roles.properties"
 echo "${bpmmanager_username}=managager" >> "${OPENSHIFT_BPMS_DIR}/standalone/configuration/bpms-roles.properties"
 echo "${root_username}=admin" >> "${OPENSHIFT_BPMS_DIR}/standalone/configuration/bpms-roles.properties"
-echo "${loan_username}=analyst,broker,manager" >> "${OPENSHIFT_BPMS_DIR}/standalone/configuration/bpms-roles.properties"
+echo "${loan_username}=analyst,broker,manager,appraiser" >> "${OPENSHIFT_BPMS_DIR}/standalone/configuration/bpms-roles.properties"
 
 
 echo "Installing samples..."
