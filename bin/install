@@ -125,6 +125,17 @@ pushd $OPENSHIFT_BPMS_DIR/standalone/configuration/initial > /dev/null
   unzip *.zip
   rm *.zip 
   mv *.war ../../deployments/
+
+  ##
+  ## FIX localhost references
+  ##
+  cd mortgage-demo
+  
+  # Replace all references to localhost
+  find . -name '*.bpmn2' -type f -print0 | xargs -0 sed -i "s/localhost/$OPENSHIFT_BPMS_IP/g"
+
+  git add .
+  git commit -m 'Fixed references'
 popd 1> /dev/null
 
 client_result ""
