@@ -285,7 +285,7 @@ function deploy() {
 function start() {
 
   # Start the java stat daemon (JVM process monitoring).
-  jstatd -J-Djava.security.policy=${BPMS_BIN_DIR}/jstatd.all.policy &
+  # jstatd -J-Djava.security.policy=${BPMS_BIN_DIR}/jstatd.all.policy &
 
   if marker_present "enable_jpda"; then
     export ENABLE_JPDA=1
@@ -319,7 +319,7 @@ function stop() {
   echo "Stopping $cartridge_type cartridge"
 
   # Kill the java stat daemon (JVM process monitoring).
-  killall jstatd
+  # killall jstatd
 
   if isrunning; then
 		if [ -f "$BPMS_PID_FILE" ]; then
