@@ -67,9 +67,6 @@ IMPORTANT NOTE: If when trying to clone the application repository you see this 
 
 You will have to remove the existing fingerprint for your ssh connection in your <code>~/.ssh/known_hosts</code> file.
 
-When you install the cartridge, several users are automatically created. Their passwords are automatically generated for security reasons and displayed as follows:
-
-
 **Manage users and roles**
 
 When you install the cartridge, several users and roles are created. Their passwords are automatically generated for security reasons and displayed during cartridge installation. The following table summarizes this initial setup:
