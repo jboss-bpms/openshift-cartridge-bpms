@@ -5,9 +5,5 @@ if [ -e $OPENSHIFT_BPMS_DIR/standalone/deployments/ROOT.war ]; then
 fi
 
 # Once the developer git repository (located at ${OPENSHIFT_REPO_DIR}) is initialized, add configuration the files.
-cp -f "${OPENSHIFT_BPMS_DIR}/standalone/configuration/bpms-users.properties" "${OPENSHIFT_REPO_DIR}/configuration/bpms-users.properties"
-cp -f "${OPENSHIFT_BPMS_DIR}/standalone/configuration/bpms-roles.properties" "${OPENSHIFT_REPO_DIR}/configuration/bpms-roles.properties"
-rm -f "${OPENSHIFT_BPMS_DIR}/standalone/configuration/bpms-users.properties"
-rm -f "${OPENSHIFT_BPMS_DIR}/standalone/configuration/bpms-roles.properties"
 ln -s "${OPENSHIFT_REPO_DIR}/configuration/bpms-users.properties" "${OPENSHIFT_BPMS_DIR}/standalone/configuration/bpms-users.properties"
 ln -s "${OPENSHIFT_REPO_DIR}/configuration/bpms-roles.properties" "${OPENSHIFT_BPMS_DIR}/standalone/configuration/bpms-roles.properties"

@@ -92,27 +92,27 @@ echo "$bpmdeveloper_username" > $OPENSHIFT_BPMS_DIR/env/OPENSHIFT_BPMS_BPMDEVELO
 echo "$bpmdeveloper_password" > $OPENSHIFT_BPMS_DIR/env/OPENSHIFT_BPMS_BPMDEVELOPER_PASSWORD
 
 # Create the bpms-security-users.properties file
-# ${OPENSHIFT_BPMS_DIR}/standalone/deployments
-echo "# username=password" > "${OPENSHIFT_BPMS_DIR}/standalone/configuration/bpms-users.properties"
-echo "${bpmadmin_username}=${bpmadmin_password}" >> "${OPENSHIFT_BPMS_DIR}/standalone/configuration/bpms-users.properties"
-echo "${bpmanalyst_username}=${bpmanalyst_password}" >> "${OPENSHIFT_BPMS_DIR}/standalone/configuration/bpms-users.properties"
-echo "${bpmdeveloper_username}=${bpmdeveloper_password}" >> "${OPENSHIFT_BPMS_DIR}/standalone/configuration/bpms-users.properties"
-echo "${bpmuser_username}=${bpmuser_password}" >> "${OPENSHIFT_BPMS_DIR}/standalone/configuration/bpms-users.properties"
-echo "${bpmmanager_username}=${bpmmanager_password}" >> "${OPENSHIFT_BPMS_DIR}/standalone/configuration/bpms-users.properties"
-echo "${root_username}=${root_password}" >> "${OPENSHIFT_BPMS_DIR}/standalone/configuration/bpms-users.properties"
-echo "${bpmdeveloper_username}=${bpmdeveloper_password}" >> "${OPENSHIFT_BPMS_DIR}/standalone/configuration/bpms-users.properties"
-echo "${loan_username}=${loan_password}" >> "${OPENSHIFT_BPMS_DIR}/standalone/configuration/bpms-users.properties"
+BPMS_USERS_PATH="${OPENSHIFT_BPMS_DIR}/template/configuration/bpms-users.properties"
+echo "# username=password" > $BPMS_USERS_PATH
+echo "${bpmadmin_username}=${bpmadmin_password}" >> $BPMS_USERS_PATH
+echo "${bpmanalyst_username}=${bpmanalyst_password}" >> $BPMS_USERS_PATH
+echo "${bpmdeveloper_username}=${bpmdeveloper_password}" >> $BPMS_USERS_PATH
+echo "${bpmuser_username}=${bpmuser_password}" >> $BPMS_USERS_PATH
+echo "${bpmmanager_username}=${bpmmanager_password}" >> $BPMS_USERS_PATH
+echo "${root_username}=${root_password}" >> $BPMS_USERS_PATH
+echo "${bpmdeveloper_username}=${bpmdeveloper_password}" >> $BPMS_USERS_PATH
+echo "${loan_username}=${loan_password}" >> $BPMS_USERS_PATH
 
 # Create the bpms-security-roles.properties file
-#
-echo "# username=role1,role2" > "${OPENSHIFT_BPMS_DIR}/standalone/configuration/bpms-roles.properties"
-echo "${bpmadmin_username}=admin" >> "${OPENSHIFT_BPMS_DIR}/standalone/configuration/bpms-roles.properties"
-echo "${bpmanalyst_username}=analyst" >> "${OPENSHIFT_BPMS_DIR}/standalone/configuration/bpms-roles.properties"
-echo "${bpmdeveloper_username}=developer" >> "${OPENSHIFT_BPMS_DIR}/standalone/configuration/bpms-roles.properties"
-echo "${bpmuser_username}=user" >> "${OPENSHIFT_BPMS_DIR}/standalone/configuration/bpms-roles.properties"
-echo "${bpmmanager_username}=manager" >> "${OPENSHIFT_BPMS_DIR}/standalone/configuration/bpms-roles.properties"
-echo "${root_username}=admin" >> "${OPENSHIFT_BPMS_DIR}/standalone/configuration/bpms-roles.properties"
-echo "${loan_username}=analyst,broker,manager,appraiser" >> "${OPENSHIFT_BPMS_DIR}/standalone/configuration/bpms-roles.properties"
+BPMS_ROLES_PATH="${OPENSHIFT_BPMS_DIR}/template/configuration/bpms-roles.properties"
+echo "# username=role1,role2" > $BPMS_ROLES_PATH
+echo "${bpmadmin_username}=admin" >> $BPMS_ROLES_PATH
+echo "${bpmanalyst_username}=analyst" >> $BPMS_ROLES_PATH
+echo "${bpmdeveloper_username}=developer" >> $BPMS_ROLES_PATH
+echo "${bpmuser_username}=user" >> $BPMS_ROLES_PATH
+echo "${bpmmanager_username}=manager" >> $BPMS_ROLES_PATH
+echo "${root_username}=admin" >> $BPMS_ROLES_PATH
+echo "${loan_username}=analyst,broker,manager,appraiser" >> $BPMS_ROLES_PATH
 
 
 echo "Installing samples..."
