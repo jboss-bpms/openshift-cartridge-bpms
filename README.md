@@ -28,6 +28,11 @@ Usage
 * In order to access the BPMS Business Central navigate to <code>http://&lt;app_name&gt;-&lt;rh_domain&gt;.&lt;domain&gt;:&lt;port&gt;/business-central</code>   
 * In order to access the BPMS Dashbuilder navigate to <code>http://&lt;app_name&gt;-&lt;rh_domain&gt;.&lt;domain&gt;:&lt;port&gt;/dashbuilder</code>
 
+**Show/Add/Remove/Modify users and roles**
+
+* The application developer can show/add/remove/modify users and roles by using the <code>bpms-users.properties</code> and <code>bpms-roles.properties</code> files found in the cartridge git repository at <code>configuration/</code> directory     
+* Once users or roles files changed, do a <code>git push</code> in order to deploy the new files in the application container configuration path.    
+
 **Clone Git repositories from the web application**
 
 * All repositories present in the web application can be cloned    

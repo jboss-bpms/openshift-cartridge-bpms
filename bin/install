@@ -167,7 +167,9 @@ client_result ""
 client_result "            BPM Example User: $loan_username"
 client_result "                    Password: $loan_password"
 client_result ""
-
+client_result "NOTE: You can add/modify/show/remove users and roles using the following files in your cartrige git repository:"
+client_result "- Users -> configuration/bpms-users.properties"
+client_result "- Roles -> configuration/bpms-roles.properties"
 
 touch ${OPENSHIFT_BPMS_DIR}/env/OPENSHIFT_BPMS_CLUSTER
 touch ${OPENSHIFT_BPMS_DIR}/env/OPENSHIFT_BPMS_CLUSTER_REMOTING
