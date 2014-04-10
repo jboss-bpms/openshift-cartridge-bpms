@@ -114,6 +114,11 @@ echo "${bpmmanager_username}=manager" >> $BPMS_ROLES_PATH
 echo "${root_username}=admin" >> $BPMS_ROLES_PATH
 echo "${loan_username}=analyst,broker,manager,appraiser" >> $BPMS_ROLES_PATH
 
+# Create temporary symlinks from <EAP_HOME>/standalone/configuration to users and roles files.
+# This files cannot be linked from $OPERNSHIFT_REPO_DIR yet because this repository is not initialized yet.
+# In post_install script, this symlinks will point the developer repository location in cartridge working directory.
+ln -s $BPMS_USERS_PATH "${OPENSHIFT_BPMS_DIR}/standalone/configuration/bpms-users.properties"
+ln -s $BPMS_ROLES_PATH "${OPENSHIFT_BPMS_DIR}/standalone/configuration/bpms-roles.properties"
 
 echo "Installing samples..."
 
