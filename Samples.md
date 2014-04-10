@@ -34,7 +34,7 @@ Now the user can view the created instance selecting Process Management -> Proce
 <img title="InstanceDetails" alt="InstanceDetails" src="https://raw.githubusercontent.com/jboss-bpms/openshift-cartridge-bpms/master/example_img/7_instanceDetails.png">
 
 To view the path in the process model followed by the instance, the user can select 'Details'.
-Selecting the wiew 'Process Model' the app show the path followed by the instante throw the model
+Selecting the view 'Process Model', the app will show the path followed by the instance through the model
 
 <img title="InstancePath" alt="InstancePath" src="https://raw.githubusercontent.com/jboss-bpms/openshift-cartridge-bpms/master/example_img/8_InstancePath.png">
 
