@@ -132,7 +132,7 @@ Example
 
 First thing to do is login as 'loan' user. Then selecting Authoring -> Project Authoring, the user access to the example assets.
 
-<img title="ExploreProject" alt="alt text" src="https://raw.githubusercontent.com/jboss-bpms/openshift-cartridge-bpms/master/example_img/1_exploreProject.png">
+<img title="ExploreProject" alt="ExploreProject" src="https://raw.githubusercontent.com/jboss-bpms/openshift-cartridge-bpms/master/example_img/1_exploreProject.png">
 
 To view the project assets the user has to navigate throw the Project explorer and open the project structure.
 
