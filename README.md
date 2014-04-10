@@ -130,3 +130,30 @@ To access into the gear type:
 
 	rhc ssh <APPLICATION-ID>
 
+Example
+-----
+
+
+<img title="ExploreProject" alt="alt text" src="https://raw.githubusercontent.com/jboss-bpms/openshift-cartridge-bpms/master/example_img/1_exploreProject.png">
+
+<img title="OpenFolder" alt="OpenFolder" src="https://raw.githubusercontent.com/jboss-bpms/openshift-cartridge-bpms/master/example_img/2_openFolder.png">
+
+<img title="OpenAssets" alt="OpenAssets" src="https://raw.githubusercontent.com/jboss-bpms/openshift-cartridge-bpms/master/example_img/3_openAssests.png">
+
+<img title="ProjectEditor" alt="ProjectEditor" src="https://raw.githubusercontent.com/jboss-bpms/openshift-cartridge-bpms/master/example_img/4_projectEditor.png">
+
+<img title="StartInstance" alt="StartInstance" src="https://raw.githubusercontent.com/jboss-bpms/openshift-cartridge-bpms/master/example_img/5_startInstance.png">
+
+<img title="ProcessInstance" alt="ProcessInstance" src="https://raw.githubusercontent.com/jboss-bpms/openshift-cartridge-bpms/master/example_img/6_Start_processInstance.png">
+
+<img title="InstanceDetails" alt="InstanceDetails" src="https://raw.githubusercontent.com/jboss-bpms/openshift-cartridge-bpms/master/example_img/7_instanceDetails.png">
+
+<img title="InstancePath" alt="InstancePath" src="https://raw.githubusercontent.com/jboss-bpms/openshift-cartridge-bpms/master/example_img/8_InstancePath.png">
+
+
+
+
+
+
+
+
