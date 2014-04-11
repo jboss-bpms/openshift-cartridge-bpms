@@ -331,7 +331,7 @@ function start() {
   doDebug "Executing: control - start"
   
   # Check configuration files are present in cartridge git repo.
-  check_config_files
+  # check_config_files
 
   # Start the java stat daemon (JVM process monitoring).
   # jstatd -J-Djava.security.policy=${BPMS_BIN_DIR}/jstatd.all.policy &
