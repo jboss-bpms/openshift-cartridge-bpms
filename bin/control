@@ -14,6 +14,10 @@ BPMS_version="6.0.1"
 
 # Return the deployment-scanner configuration
 function getscanconfig() {
+
+    # Debugging
+    doDebug "Executing: control - getscanconfig"
+    
     count=0
     while [ ${count} -lt 4 ]; do
       controller="${OPENSHIFT_BPMS_IP}:${OPENSHIFT_BPMS_MANAGEMENT_NATIVE_PORT}"
@@ -31,6 +35,9 @@ function getscanconfig() {
 # Wait for deployments
 function waitondeployments() {
 
+    # Debugging
+    doDebug "Executing: control - waitondeployments"
+        
     if ! ismgmtup; then
       client_message "Timed out waiting for management listening port"
       client_message "Could not connect to JBoss management interface, skipping deployment verification"
@@ -94,6 +101,9 @@ function waitondeployments() {
 # Check if the bpms process is running
 function isrunning() {
     
+    # Debugging
+    doDebug "Executing: control - isrunning"
+        
     # Check for running app
     if [ -f "$BPMS_PID_FILE" ]; then
       jbpid=$(cat $BPMS_PID_FILE);
@@ -108,6 +118,10 @@ function isrunning() {
 
 # Kill the process given by $1 and its children
 killtree() {
+
+    # Debugging
+    doDebug "Executing: control - killtree"
+    
     local _pid=$1
     for _child in $(ps -o pid --no-headers --ppid ${_pid}); do
         killtree ${_child}
@@ -144,6 +158,10 @@ killtree() {
 
 # Check if the server http port is up
 function ishttpup() {
+
+    # Debugging
+    doDebug "Executing: control - ishttpup"
+    
     count=0
     while [ ${count} -lt 64 ]
     do
@@ -167,6 +185,10 @@ function ishttpup() {
 
 # Check if the server mgmt port is up
 function ismgmtup() {
+
+    # Debugging
+    doDebug "Executing: control - ismgmtup"
+    
     let count=0
     while [ ${count} -lt 10 ]
     do
@@ -183,6 +205,10 @@ function ismgmtup() {
 }
 
 function build() {
+
+  # Debugging
+  doDebug "Executing: control - build"
+  
   echo "Building $cartridge_type cartridge"
 
   CONFIG_DIR="${OPENSHIFT_BPMS_DIR}/standalone/configuration"
@@ -262,6 +288,10 @@ function build() {
 }
 
 function deploy() {
+
+  # Debugging
+  doDebug "Executing: control - deploy"
+  
   echo "Deploying JBoss BPM Suite"
 
   # if repo/deployments has any files in it, sync them to $BPMS_DEPLOYMENTS_DIR
@@ -284,6 +314,9 @@ function deploy() {
 
 function start() {
 
+  # Debugging
+  doDebug "Executing: control - start"
+  
   # Start the java stat daemon (JVM process monitoring).
   # jstatd -J-Djava.security.policy=${BPMS_BIN_DIR}/jstatd.all.policy &
 
@@ -316,6 +349,10 @@ function start() {
 
 
 function stop() {
+
+  # Debugging
+  doDebug "Executing: control - stop"
+      
   echo "Stopping $cartridge_type cartridge"
 
   # Kill the java stat daemon (JVM process monitoring).
@@ -333,11 +370,19 @@ function stop() {
 }
 
 function restart() {
+
+    # Debugging
+    doDebug "Executing: control - restart"
+    
     stop
     start
 }
 
 function status() {
+
+   # Debugging
+   doDebug "Executing: control - status"
+   
    if isrunning
    then
       client_result "Application is running"
@@ -347,11 +392,18 @@ function status() {
 }
 
 function reload() {
+    # Debugging
+    doDebug "Executing: control - reload"
+    
     restart
 }
 
 # Clean up any log files
 function tidy() {
+
+  # Debugging
+  doDebug "Executing: control - tidy"
+  
   client_message "Emptying log dir: $OPENSHIFT_BPMS_LOG_DIR"
   shopt -s dotglob
   rm -rf $OPENSHIFT_BPMS_LOG_DIR/*
@@ -359,6 +411,10 @@ function tidy() {
 }
 
 function threaddump() {
+
+  # Debugging
+  doDebug "Executing: control - threaddump"
+  
   echo "Thread dump for $cartridge_type cartridge"
 
     if ! isrunning; then
@@ -377,9 +433,25 @@ function threaddump() {
 }
 
 function pre_restore() {
+
+  # Debugging
+  doDebug "Executing: control - pre_restore"
+  
   # this directory contains cached versions of the built jsps which will continue
   # to get used because they have newer dates than the restored archive.
   rm -rf $OPENSHIFT_BPMS_DIR/standalone/tmp/*
+}
+
+
+# Debugging purposes
+DEBUG=1
+DEBUG_FILE=$OPENSHIFT_BPMS_DIR/debug.txt
+function doDebug() {
+    if [ $DEBUG -eq 1 ]; then
+        MESSAGE=$1
+        TS=`date +%Y%m%d-%T`
+        echo "$TS - $1" >> $DEBUG_FILE
+    fi
 }
 
 export OPENSHIFT_SECRET_TOKEN=${OPENSHIFT_SECRET_TOKEN:-OPENSHIFT_APP_UUID}
