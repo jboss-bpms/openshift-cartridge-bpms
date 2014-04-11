@@ -1,7 +1,5 @@
 #!/bin/bash -eu
 
-client_result "Starting setup"
-
 case "$1" in
   -v|--version)
     version="$2"
@@ -18,8 +16,3 @@ cp ${OPENSHIFT_BPMS_DIR}/versions/${version}/bin/* ${OPENSHIFT_BPMS_DIR}/bin
 #cp -r ${OPENSHIFT_BPMS_DIR}/versions/${version}/modules/org/* ${OPENSHIFT_BPMS_DIR}/modules_ext/org
 # Initialize the JBoss CLI history file
 [ -f ${OPENSHIFT_HOMEDIR}/.jboss-cli-history ] || touch ${OPENSHIFT_HOMEDIR}/.jboss-cli-history
-
-mkdir -p $OPENSHIFT_BPMS_DIR/jboss_cfg_backup
-cp -n ${OPENSHIFT_BPMS_DIR}/template/${OPENSHIFT_BPMS_CONFIG_PATH}/standalone.xml $OPENSHIFT_BPMS_DIR/jboss_cfg_backup
-
-client_result "Setup finished"

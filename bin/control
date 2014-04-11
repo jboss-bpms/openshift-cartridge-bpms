@@ -21,7 +21,7 @@ function doDebug() {
         TS=`date +%Y%m%d-%T`
         MESSAGE_TO_PRINT="$TS - $1"
         echo $MESSAGE_TO_PRINT >> $DEBUG_FILE
-        client_message $MESSAGE_TO_PRINT
+        client_result $MESSAGE_TO_PRINT
     fi
 }
 

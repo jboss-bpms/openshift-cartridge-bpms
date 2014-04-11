@@ -15,4 +15,3 @@ locked_files:
 - env/OPENSHIFT_JBOSSAS_VERSION
 - env/M2_HOME
 - template/
-- jboss_cfg_backup/
