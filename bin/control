@@ -21,7 +21,7 @@ function doDebug() {
         TS=`date +%Y%m%d-%T`
         MESSAGE_TO_PRINT="$TS - $1"
         echo $MESSAGE_TO_PRINT >> $DEBUG_FILE
-        # >&2 printf $MESSAGE_TO_PRINT
+        client_message $MESSAGE_TO_PRINT
     fi
 }
 
@@ -489,7 +489,7 @@ function check_config_file() {
     
     # Check file is present in cartridge git repo.
     if [ ! -f $FILE_PATH ]; then
-        echo "Configuration file $FILE_NAME does not exist."
+        client_error "Configuration file $FILE_NAME does not exist."
         exit 1
     fi
 }
