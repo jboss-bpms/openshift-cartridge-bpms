@@ -132,4 +132,4 @@ To access into the gear type:
 
 	rhc ssh <APPLICATION-ID>
 
- Follow the examples below to see how get start: <a href="Samples.md">Example</a>.
+ Follow the examples below to see how get start: <a href="doc/Samples.md">Example</a>.
