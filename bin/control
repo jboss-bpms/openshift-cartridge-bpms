@@ -224,9 +224,6 @@ function build() {
   
   echo "Building $cartridge_type cartridge"
 
-  # Check configuration files are present in cartridge git repo.
-  check_config_files
-  
   CONFIG_DIR="${OPENSHIFT_BPMS_DIR}/standalone/configuration"
   OPENSHIFT_MAVEN_MIRROR="${CONFIG_DIR}/settings.base.xml"
   if $(echo $OPENSHIFT_GEAR_DNS | egrep -qe "\.rhcloud\.com")
