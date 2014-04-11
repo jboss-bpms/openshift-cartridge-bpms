@@ -13,7 +13,7 @@ cartridge_type="bpms"
 BPMS_version="6.0.1"
 
 # Debugging purposes
-DEBUG=0
+DEBUG=1
 DEBUG_FILE=$OPENSHIFT_BPMS_DIR/debug.txt
 function doDebug() {
     if [ $DEBUG -eq 1 ]; then
