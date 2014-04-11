@@ -23,10 +23,8 @@ rm -rf ${OPENSHIFT_BPMS_DIR}/.git
 mv ${OPENSHIFT_BPMS_DIR}/versions/${version}/share/* ${OPENSHIFT_BPMS_DIR}/share
 mv ${OPENSHIFT_BPMS_DIR}/versions/${version}/jboss/modules ${OPENSHIFT_BPMS_DIR}/jboss
 mv ${OPENSHIFT_BPMS_DIR}/versions/${version}/jboss/jboss-modules.jar ${OPENSHIFT_BPMS_DIR}/jboss
-cp ${OPENSHIFT_BPMS_DIR}/standalone/configuration/standalone.xml ${OPENSHIFT_BPMS_DIR}/template/.openshift/config
-##cp ${OPENSHIFT_BPMS_DIR}/versions/${version}/standalone/deployments/dashbuilder.war ${OPENSHIFT_BPMS_DIR}/standalone/deployments/dashbuilder.war
-##cp -R ${OPENSHIFT_BPMS_DIR}/versions/${version}/standalone/deployments/dashbuilder.war ${OPENSHIFT_BPMS_DIR}/standalone/deployments
-##cp -R ${OPENSHIFT_BPMS_DIR}/versions/${version}/standalone/deployments/business-central.war ${OPENSHIFT_BPMS_DIR}/standalone/deployments
+cp ${OPENSHIFT_BPMS_DIR}/standalone/configuration/standalone.xml ${OPENSHIFT_BPMS_DIR}/template/${OPENSHIFT_BPMS_CONFIG_PATH}
+
 mv ${OPENSHIFT_BPMS_DIR}/versions/${version}/standalone/deployments/dashbuilder.war ${OPENSHIFT_BPMS_DIR}/standalone/deployments/
 mv ${OPENSHIFT_BPMS_DIR}/versions/${version}/standalone/deployments/business-central.war ${OPENSHIFT_BPMS_DIR}/standalone/deployments/
 cp ${OPENSHIFT_BPMS_DIR}/versions/${version}/standalone/deployments/dashbuilder.war.dodeploy ${OPENSHIFT_BPMS_DIR}/standalone/deployments
@@ -92,7 +90,7 @@ echo "$bpmdeveloper_username" > $OPENSHIFT_BPMS_DIR/env/OPENSHIFT_BPMS_BPMDEVELO
 echo "$bpmdeveloper_password" > $OPENSHIFT_BPMS_DIR/env/OPENSHIFT_BPMS_BPMDEVELOPER_PASSWORD
 
 # Create the bpms-security-users.properties file
-BPMS_USERS_PATH="${OPENSHIFT_BPMS_DIR}/template/configuration/bpms-users.properties"
+BPMS_USERS_PATH="${OPENSHIFT_BPMS_DIR}/template/${OPENSHIFT_BPMS_CONFIG_PATH}/${OPENSHIFT_BPMS_USERS_FILE}"
 echo "# username=password" > $BPMS_USERS_PATH
 echo "${bpmadmin_username}=${bpmadmin_password}" >> $BPMS_USERS_PATH
 echo "${bpmanalyst_username}=${bpmanalyst_password}" >> $BPMS_USERS_PATH
@@ -104,7 +102,7 @@ echo "${bpmdeveloper_username}=${bpmdeveloper_password}" >> $BPMS_USERS_PATH
 echo "${loan_username}=${loan_password}" >> $BPMS_USERS_PATH
 
 # Create the bpms-security-roles.properties file
-BPMS_ROLES_PATH="${OPENSHIFT_BPMS_DIR}/template/configuration/bpms-roles.properties"
+BPMS_ROLES_PATH="${OPENSHIFT_BPMS_DIR}/template/${OPENSHIFT_BPMS_CONFIG_PATH}/${OPENSHIFT_BPMS_ROLES_FILE}"
 echo "# username=role1,role2" > $BPMS_ROLES_PATH
 echo "${bpmadmin_username}=admin" >> $BPMS_ROLES_PATH
 echo "${bpmanalyst_username}=analyst" >> $BPMS_ROLES_PATH
@@ -117,8 +115,8 @@ echo "${loan_username}=analyst,broker,manager,appraiser" >> $BPMS_ROLES_PATH
 # Create temporary symlinks from <EAP_HOME>/standalone/configuration to users and roles files.
 # This files cannot be linked from $OPERNSHIFT_REPO_DIR yet because this repository is not initialized yet.
 # In post_install script, this symlinks will point the developer repository location in cartridge working directory.
-ln -s $BPMS_USERS_PATH "${OPENSHIFT_BPMS_DIR}/standalone/configuration/bpms-users.properties"
-ln -s $BPMS_ROLES_PATH "${OPENSHIFT_BPMS_DIR}/standalone/configuration/bpms-roles.properties"
+ln -s $BPMS_USERS_PATH "${OPENSHIFT_BPMS_DIR}/standalone/configuration/${OPENSHIFT_BPMS_USERS_FILE}"
+ln -s $BPMS_ROLES_PATH "${OPENSHIFT_BPMS_DIR}/standalone/configuration/${OPENSHIFT_BPMS_ROLES_FILE}"
 
 echo "Installing samples..."
 
@@ -168,8 +166,8 @@ client_result "            BPM Example User: $loan_username"
 client_result "                    Password: $loan_password"
 client_result ""
 client_result "NOTE: You can add/modify/show/remove users and roles using the following files in your cartridge git repository:"
-client_result "- Users -> configuration/bpms-users.properties"
-client_result "- Roles -> configuration/bpms-roles.properties"
+client_result "- Users -> ${OPENSHIFT_BPMS_CONFIG_PATH}${OPENSHIFT_BPMS_USERS_FILE}"
+client_result "- Roles -> ${OPENSHIFT_BPMS_CONFIG_PATH}${OPENSHIFT_BPMS_ROLES_FILE}"
 
 touch ${OPENSHIFT_BPMS_DIR}/env/OPENSHIFT_BPMS_CLUSTER
 touch ${OPENSHIFT_BPMS_DIR}/env/OPENSHIFT_BPMS_CLUSTER_REMOTING

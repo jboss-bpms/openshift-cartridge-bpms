@@ -28,10 +28,68 @@ Usage
 * In order to access the BPMS Business Central navigate to <code>http://&lt;app_name&gt;-&lt;rh_domain&gt;.&lt;domain&gt;:&lt;port&gt;/business-central</code>   
 * In order to access the BPMS Dashbuilder navigate to <code>http://&lt;app_name&gt;-&lt;rh_domain&gt;.&lt;domain&gt;:&lt;port&gt;/dashbuilder</code>
 
-**Show/Add/Remove/Modify users and roles**
+**Access into the application shell**
 
-* The application developer can show/add/remove/modify users and roles by using the <code>bpms-users.properties</code> and <code>bpms-roles.properties</code> files found in the cartridge git repository at <code>configuration/</code> directory     
-* Once users or roles files changed, do a <code>git push</code> in order to deploy the new files in the application container configuration path.    
+To access into the application shell:
+
+	rhc ssh <APPLICATION-ID>
+
+**Manage users and roles**
+
+When you install the cartridge, several users and roles are created. Their passwords are automatically generated for security reasons and displayed during cartridge installation. The following table summarizes this initial setup:
+
+<table>
+<tr>
+	<th>User</th>
+	<th>Description</th>
+	<th>Roles</th>
+</tr>
+<tr>
+	<td>bpm-admin</td>
+	<td>BPM Administrator</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>bpm-analyst</td>
+	<td>Process analyst role</td>
+	<td>analyst</td>
+</tr>
+<tr>
+	<td>bpm-manager</td>
+	<td>BPM Manager</td>
+	<td>manager</td>
+</tr>
+<tr>
+	<td>bpm-user</td>
+	<td>BPM User</td>
+	<td>user</td>
+</tr>
+<tr>
+	<td>root</td>
+	<td>Dashboard superuser</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>loan</td>
+	<td>User to run the mortgage example</td>
+	<td>analyst,broker,manager,appraiser</td>
+</tr>
+</table>
+
+* The application developer can show/add/remove/modify users and roles by using the <code>bpms-users.properties</code> and <code>bpms-roles.properties</code> files found in the cartridge git repository at <code>.openshift/config/</code> directory     
+* Once users or roles files changed, do a <code>git push</code> in order to deploy the new files in the application container configuration path.         
+* To display the current list of users and their passwords, you can simply run this command in your cartridge repository:
+
+        cat .openshift/config/bpms-users.properties
+    
+* The current assignation of roles can be displayed by running this command in your cartridge repository:
+
+        cat .openshift/config/bpms-roles.properties
+        
+* To create new users, change their passwords or role assignation, you must edit the following files in your cartridge repository.
+
+        vi .openshift/config/bpms-users.properties
+        vi .openshift/config/bpms-roles.properties
 
 **Clone Git repositories from the web application**
 
@@ -72,64 +130,8 @@ IMPORTANT NOTE: If when trying to clone the application repository you see this 
 
 You will have to remove the existing fingerprint for your ssh connection in your <code>~/.ssh/known_hosts</code> file.
 
-**Manage users and roles**
+**Example**
 
-When you install the cartridge, several users and roles are created. Their passwords are automatically generated for security reasons and displayed during cartridge installation. The following table summarizes this initial setup:
-
-<table>
-<tr>
-	<td>User</td>
-	<td>Description</td>
-	<td>Roles</td>
-</tr>
-<tr>
-	<td>bpm-admin</td>
-	<td>BPM Administrator</td>
-	<td>admin</td>
-</tr>
-<tr>
-	<td>bpm-analyst</td>
-	<td>Process analyst role</td>
-	<td>analyst</td>
-</tr>
-<tr>
-	<td>bpm-manager</td>
-	<td>BPM Manager</td>
-	<td>manager</td>
-</tr>
-<tr>
-	<td>bpm-user</td>
-	<td>BPM User</td>
-	<td>user</td>
-</tr>
-<tr>
-	<td>root</td>
-	<td>Dashboard superuser</td>
-	<td>admin</td>
-</tr>
-<tr>
-	<td>loan</td>
-	<td>User to run the mortgage example</td>
-	<td>analyst,broker,manager,appraiser</td>
-</tr>
-</table>
+Follow this <a href="doc/Samples.md">guide</a> to get started with the BPMS application.
 
 
-To display the current list of users and their passwords, you can simply use the following RHC command:
-
-	rhc ssh <APPLICATION-ID>  'cat bpms/standalone/configuration/bpms-users.properties'
-
-The current assignation of roles can be displayed by using:
-
-	rhc ssh <APPLICATION-ID>  'cat bpms/standalone/configuration/bpms-roles.properties'
-
-To create new users, change their passwords or role assignation, you must edit the following files inside the gear.
-	
-	bpms/standalone/configuration/bpms-users.properties
-	bpms/standalone/configuration/bpms-roles.properties
-
-To access into the gear type:
-
-	rhc ssh <APPLICATION-ID>
-
- Follow the examples below to see how get start: <a href="doc/Samples.md">Example</a>.

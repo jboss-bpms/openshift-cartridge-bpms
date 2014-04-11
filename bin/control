@@ -316,10 +316,10 @@ function deploy() {
     ##cp dashbuilder.war $BPMS_DEPLOYMENTS_DIR
     ##cp -R dashbuilder.war $BPMS_DEPLOYMENTS_DIR
     ##cp -R business-central.war $BPMS_DEPLOYMENTS_DIR
-    mv business-central.war $BPMS_DEPLOYMENTS_DIR
-    mv dashbuilder.war $BPMS_DEPLOYMENTS_DIR
-    cp dashbuilder.war.dodeploy $BPMS_DEPLOYMENTS_DIR
-    cp business-central.war.dodeploy $BPMS_DEPLOYMENTS_DIR
+    #mv business-central.war $BPMS_DEPLOYMENTS_DIR
+    #mv dashbuilder.war $BPMS_DEPLOYMENTS_DIR
+    #cp dashbuilder.war.dodeploy $BPMS_DEPLOYMENTS_DIR
+    #cp business-central.war.dodeploy $BPMS_DEPLOYMENTS_DIR
     popd
 }
 
