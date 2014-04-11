@@ -1,5 +1,7 @@
 #!/bin/bash -eu
 
+>&2 printf "Setup started"
+
 case "$1" in
   -v|--version)
     version="$2"
