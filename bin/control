@@ -331,7 +331,7 @@ function start() {
   doDebug "Executing: control - start"
   
   # Check configuration files are present in cartridge git repo.
-  # check_config_files
+  check_config_files
 
   # Start the java stat daemon (JVM process monitoring).
   # jstatd -J-Djava.security.policy=${BPMS_BIN_DIR}/jstatd.all.policy &
@@ -350,7 +350,7 @@ function start() {
     
     # Copy the standalone.xml configuration file from cartridge git repository.
     rm -f ${CONFIG_DIR}/standalone.xml
-    cp -f ${OPENSHIFT_REPO_DIR}/${OPENSHIFT_BPMS_CONFIG_DIR}/standalone.xml ${CONFIG_DIR}/standalone.xml
+    cp -f ${OPENSHIFT_REPO_DIR}/${OPENSHIFT_BPMS_CONFIG_PATH}/standalone.xml ${CONFIG_DIR}/standalone.xml
     
     ${BPMS_BIN_DIR}/standalone.sh > ${OPENSHIFT_TMP_DIR}/${cartridge_type}.log 2>&1 &
     PROCESS_ID=$!
@@ -466,9 +466,9 @@ function pre_restore() {
 
 # Check configuration helper methods.
 function check_config_files() {
-    STANDALONE_FILE_PATH=${OPENSHIFT_REPO_DIR}/${OPENSHIFT_BPMS_CONFIG_DIR}/standalone.xml
-    BPMS_USERS_FILE_PATH=${OPENSHIFT_REPO_DIR}/${OPENSHIFT_BPMS_CONFIG_DIR}/${OPENSHIFT_BPMS_USERS_FILE}
-    BPMS_ROLES_FILE_PATH=${OPENSHIFT_REPO_DIR}/${OPENSHIFT_BPMS_CONFIG_DIR}/${OPENSHIFT_BPMS_ROLES_FILE}
+    STANDALONE_FILE_PATH=${OPENSHIFT_REPO_DIR}/${OPENSHIFT_BPMS_CONFIG_PATH}/standalone.xml
+    BPMS_USERS_FILE_PATH=${OPENSHIFT_REPO_DIR}/${OPENSHIFT_BPMS_CONFIG_PATH}/${OPENSHIFT_BPMS_USERS_FILE}
+    BPMS_ROLES_FILE_PATH=${OPENSHIFT_REPO_DIR}/${OPENSHIFT_BPMS_CONFIG_PATH}/${OPENSHIFT_BPMS_ROLES_FILE}
     
     # Check standalone configuration file is present in cartridge git repo.
     check_config_file $STANDALONE_FILE_PATH
