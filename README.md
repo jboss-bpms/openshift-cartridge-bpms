@@ -91,6 +91,12 @@ When you install the cartridge, several users and roles are created. Their passw
         vi .openshift/config/bpms-users.properties
         vi .openshift/config/bpms-roles.properties
 
+**Manage JBoss EAP configuration**
+
+* The main configuration file for JBoss EAP is <code>standalone.xml</code>
+* This file is available in in your cartridge repository at location <code>.openshift/config/standalone.xml</code>
+* Usefull for changing container configurations such as root logger level and so on
+
 **Clone Git repositories from the web application**
 
 * All repositories present in the web application can be cloned    
