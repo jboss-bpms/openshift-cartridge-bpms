@@ -166,13 +166,10 @@ client_result "            BPM Example User: $loan_username"
 client_result "                    Password: $loan_password"
 client_result ""
 client_result "Configuration files: "
-client_result "1.- You can add/modify/show/remove users and roles using the following files in your cartridge git repository:"
-client_result "- Users -> ${OPENSHIFT_BPMS_CONFIG_PATH}${OPENSHIFT_BPMS_USERS_FILE}"
-client_result "- Roles -> ${OPENSHIFT_BPMS_CONFIG_PATH}${OPENSHIFT_BPMS_ROLES_FILE}"
-client_result "2.- You can modify the JBoss EAP standalone configuration file used for the BPMS application in your cartridge git repository at path ${OPENSHIFT_BPMS_CONFIG_PATH}/standalone.xml"
-
-
+client_result "- You can add/modify/show/remove users and roles using the following files in your cartridge git repository:"
+client_result "   - Users -> ${OPENSHIFT_BPMS_CONFIG_PATH}${OPENSHIFT_BPMS_USERS_FILE}"
+client_result "   - Roles -> ${OPENSHIFT_BPMS_CONFIG_PATH}${OPENSHIFT_BPMS_ROLES_FILE}"
+client_result "2.- You can modify the JBoss EAP standalone configuration file used for the BPMS application in your cartridge git repository at path ${OPENSHIFT_BPMS_CONFIG_PATH}standalone.xml"
 touch ${OPENSHIFT_BPMS_DIR}/env/OPENSHIFT_BPMS_CLUSTER
 touch ${OPENSHIFT_BPMS_DIR}/env/OPENSHIFT_BPMS_CLUSTER_REMOTING
-
 update-configuration java7
