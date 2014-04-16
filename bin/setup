@@ -11,7 +11,7 @@ mkdir -p ${OPENSHIFT_BPMS_DIR}/{standalone/tmp,standalone/deployments,standalone
 
 # Copy the version specific files up to BPMS directory
 cp -r ${OPENSHIFT_BPMS_DIR}/versions/${version}/standalone/configuration/* ${OPENSHIFT_BPMS_DIR}/standalone/configuration
-ln -s ${OPENSHIFT_BPMS_DIR}/versions/${version}/bin ${OPENSHIFT_BPMS_DIR}
+ln -s ${OPENSHIFT_BPMS_DIR}/versions/${version}/bin/* ${OPENSHIFT_BPMS_DIR}/bin
 
 #Nothing in modules currently
 #cp -r ${OPENSHIFT_BPMS_DIR}/versions/${version}/modules/org/* ${OPENSHIFT_BPMS_DIR}/modules_ext/org
