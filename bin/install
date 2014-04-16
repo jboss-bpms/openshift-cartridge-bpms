@@ -13,22 +13,22 @@ echo "$version" > "$OPENSHIFT_BPMS_DIR/env/OPENSHIFT_BPMS_VERSION"
 ln -s ${OPENSHIFT_BPMS_DIR}/standalone/log ${OPENSHIFT_BPMS_DIR}/logs
 
 shopt -s dotglob
-cp -r ${OPENSHIFT_BPMS_DIR}/versions/${version}/template/* ${OPENSHIFT_BPMS_DIR}/template
+ln -s ${OPENSHIFT_BPMS_DIR}/versions/${version}/template ${OPENSHIFT_BPMS_DIR}
 
 ##
 ## Remove .git directory for space
 ##
 rm -rf ${OPENSHIFT_BPMS_DIR}/.git
 
-mv ${OPENSHIFT_BPMS_DIR}/versions/${version}/share/* ${OPENSHIFT_BPMS_DIR}/share
-mv ${OPENSHIFT_BPMS_DIR}/versions/${version}/jboss/modules ${OPENSHIFT_BPMS_DIR}/jboss
-mv ${OPENSHIFT_BPMS_DIR}/versions/${version}/jboss/jboss-modules.jar ${OPENSHIFT_BPMS_DIR}/jboss
+ln -s ${OPENSHIFT_BPMS_DIR}/versions/${version}/share ${OPENSHIFT_BPMS_DIR}
+ln -s ${OPENSHIFT_BPMS_DIR}/versions/${version}/jboss/modules ${OPENSHIFT_BPMS_DIR}/jboss
+ln -s ${OPENSHIFT_BPMS_DIR}/versions/${version}/jboss/jboss-modules.jar ${OPENSHIFT_BPMS_DIR}/jboss
 cp ${OPENSHIFT_BPMS_DIR}/template/${OPENSHIFT_BPMS_CONFIG_PATH}/standalone.xml ${OPENSHIFT_BPMS_DIR}/standalone/configuration/standalone.xml 
 
-mv ${OPENSHIFT_BPMS_DIR}/versions/${version}/standalone/deployments/dashbuilder.war ${OPENSHIFT_BPMS_DIR}/standalone/deployments/
-mv ${OPENSHIFT_BPMS_DIR}/versions/${version}/standalone/deployments/business-central.war ${OPENSHIFT_BPMS_DIR}/standalone/deployments/
-cp ${OPENSHIFT_BPMS_DIR}/versions/${version}/standalone/deployments/dashbuilder.war.dodeploy ${OPENSHIFT_BPMS_DIR}/standalone/deployments
-cp ${OPENSHIFT_BPMS_DIR}/versions/${version}/standalone/deployments/business-central.war.dodeploy ${OPENSHIFT_BPMS_DIR}/standalone/deployments
+ln -s ${OPENSHIFT_BPMS_DIR}/versions/${version}/standalone/deployments/dashbuilder.war ${OPENSHIFT_BPMS_DIR}/standalone/deployments/dashbuilder.war
+ln -s ${OPENSHIFT_BPMS_DIR}/versions/${version}/standalone/deployments/business-central.war ${OPENSHIFT_BPMS_DIR}/standalone/deployments/business-central.war
+ln -s ${OPENSHIFT_BPMS_DIR}/versions/${version}/standalone/deployments/dashbuilder.war.dodeploy ${OPENSHIFT_BPMS_DIR}/standalone/deployments/dashbuilder.war.dodeploy
+ln -s ${OPENSHIFT_BPMS_DIR}/versions/${version}/standalone/deployments/business-central.war.dodeploy ${OPENSHIFT_BPMS_DIR}/standalone/deployments/business-central.war.dodeploy
 
 
 sed -i "s/{APP_NAME}/${OPENSHIFT_APP_NAME}/g" ${OPENSHIFT_BPMS_DIR}/template/pom.xml

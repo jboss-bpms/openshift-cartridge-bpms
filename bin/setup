@@ -7,12 +7,14 @@ esac
 
 # Create additional directories required by BPMS
 mkdir -p ${OPENSHIFT_HOMEDIR}/.m2
-mkdir -p ${OPENSHIFT_BPMS_DIR}/{template,standalone/tmp,standalone/deployments,standalone/configuration,standalone/log,standalone/data,modules_ext/org,share,jboss}
+mkdir -p ${OPENSHIFT_BPMS_DIR}/{standalone/tmp,standalone/deployments,standalone/configuration,standalone/log,standalone/data,modules_ext/org,jboss}
 
 # Copy the version specific files up to BPMS directory
 cp -r ${OPENSHIFT_BPMS_DIR}/versions/${version}/standalone/configuration/* ${OPENSHIFT_BPMS_DIR}/standalone/configuration
-cp ${OPENSHIFT_BPMS_DIR}/versions/${version}/bin/* ${OPENSHIFT_BPMS_DIR}/bin
+ln -s ${OPENSHIFT_BPMS_DIR}/versions/${version}/bin ${OPENSHIFT_BPMS_DIR}
+
 #Nothing in modules currently
 #cp -r ${OPENSHIFT_BPMS_DIR}/versions/${version}/modules/org/* ${OPENSHIFT_BPMS_DIR}/modules_ext/org
+
 # Initialize the JBoss CLI history file
 [ -f ${OPENSHIFT_HOMEDIR}/.jboss-cli-history ] || touch ${OPENSHIFT_HOMEDIR}/.jboss-cli-history
