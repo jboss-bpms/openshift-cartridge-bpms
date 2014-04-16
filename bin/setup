@@ -7,7 +7,7 @@ esac
 
 # Create additional directories required by BPMS
 mkdir -p ${OPENSHIFT_HOMEDIR}/.m2
-mkdir -p ${OPENSHIFT_BPMS_DIR}/{standalone/tmp,standalone/deployments,standalone/configuration,standalone/log,standalone/data,modules_ext/org,jboss}
+mkdir -p ${OPENSHIFT_BPMS_DIR}/{template,standalone/tmp,standalone/deployments,standalone/configuration,standalone/log,standalone/data,modules_ext/org,jboss}
 
 # Copy the version specific files up to BPMS directory
 cp -r ${OPENSHIFT_BPMS_DIR}/versions/${version}/standalone/configuration/* ${OPENSHIFT_BPMS_DIR}/standalone/configuration

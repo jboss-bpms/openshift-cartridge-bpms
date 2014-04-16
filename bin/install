@@ -13,7 +13,7 @@ echo "$version" > "$OPENSHIFT_BPMS_DIR/env/OPENSHIFT_BPMS_VERSION"
 ln -s ${OPENSHIFT_BPMS_DIR}/standalone/log ${OPENSHIFT_BPMS_DIR}/logs
 
 shopt -s dotglob
-ln -s ${OPENSHIFT_BPMS_DIR}/versions/${version}/template/* ${OPENSHIFT_BPMS_DIR}/template
+cp -rf ${OPENSHIFT_BPMS_DIR}/versions/${version}/template/* ${OPENSHIFT_BPMS_DIR}/template
 
 ##
 ## Remove .git directory for space
