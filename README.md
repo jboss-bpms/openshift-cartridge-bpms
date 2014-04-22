@@ -136,6 +136,36 @@ IMPORTANT NOTE: If when trying to clone the application repository you see this 
 
 You will have to remove the existing fingerprint for your ssh connection in your <code>~/.ssh/known_hosts</code> file.
 
+**Debugging application code**
+
+If you need to debug your application code, you must enable the <code>enable_jpda</code> marker in the cartridge git repository:
+
+    cd <app_name>/.openshift/markers/
+    touch enable_jpda
+    git add enable_jpda
+    git commit enable_jpda -m "message"
+    git push
+
+Once the push is completed successfully, next step is to perform port forwarding:
+
+    rhc port-forward <app_name>
+
+You should see something similar to:
+
+    Service Local               OpenShift
+    ------- -------------- ---- ----------------
+    java    127.0.0.1:3528  =>  127.1.244.1:3528
+    java    127.0.0.1:4447  =>  127.1.244.1:4447
+    java    127.0.0.1:5445  =>  127.1.244.1:5445
+    java    127.0.0.1:8080  =>  127.1.244.1:8080
+    java    127.0.0.1:8787  =>  127.1.244.1:8787
+    java    127.0.0.1:9520  =>  127.1.244.1:9520
+    java    127.0.0.1:9521  =>  127.1.244.1:9521
+    java    127.0.0.1:9990  =>  127.1.244.1:9990
+    java    127.0.0.1:9999  =>  127.1.244.1:9999
+
+The debug port is <code>8787</code>. Now you can do remote debugging to <code>127.0.0.1:8787</code>.
+
 **Example**
 
 Follow this <a href="doc/Samples.md">guide</a> to get started with the BPMS application.
