@@ -310,20 +310,10 @@ function deploy() {
   # if repo/deployments has any files in it, sync them to $BPMS_DEPLOYMENTS_DIR
   # and delete any files in $BPMS_DEPLOYMENTS_DIR that don't exist in
   # repo/deployments
- # if [ "$(ls ${OPENSHIFT_REPO_DIR}/deployments 2>/dev/null)" ]; then
- #   rsync -r --delete --exclude ".*" ${OPENSHIFT_REPO_DIR}/deployments/ $BPMS_DEPLOYMENTS_DIR
- # fi
-  # copy standard bpms default wars to deployments
-  pushd $OPENSHIFT_BPMS_DIR/versions/$BPMS_version/standalone/deployments
-    ##cp dashbuilder.war $BPMS_DEPLOYMENTS_DIR
-    ##cp -R dashbuilder.war $BPMS_DEPLOYMENTS_DIR
-    ##cp -R business-central.war $BPMS_DEPLOYMENTS_DIR
-    #mv business-central.war $BPMS_DEPLOYMENTS_DIR
-    #mv dashbuilder.war $BPMS_DEPLOYMENTS_DIR
-    #cp dashbuilder.war.dodeploy $BPMS_DEPLOYMENTS_DIR
-    #cp business-central.war.dodeploy $BPMS_DEPLOYMENTS_DIR
-    popd
-}
+  if [ "$(ls ${OPENSHIFT_REPO_DIR}/deployments 2>/dev/null)" ]; then
+     rsync -r --delete ${OPENSHIFT_REPO_DIR}/deployments/ROOT.war $BPMS_DEPLOYMENTS_DIR/ROOT.war
+   fi
+  }
 
 function start() {
 
