@@ -23,7 +23,8 @@ rm -rf ${OPENSHIFT_BPMS_DIR}/.git
 ln -s ${OPENSHIFT_BPMS_DIR}/versions/${version}/share ${OPENSHIFT_BPMS_DIR}
 ln -s ${OPENSHIFT_BPMS_DIR}/versions/${version}/jboss/modules ${OPENSHIFT_BPMS_DIR}/jboss
 ln -s ${OPENSHIFT_BPMS_DIR}/versions/${version}/jboss/jboss-modules.jar ${OPENSHIFT_BPMS_DIR}/jboss
-cp ${OPENSHIFT_BPMS_DIR}/template/${OPENSHIFT_BPMS_CONFIG_PATH}/standalone.xml ${OPENSHIFT_BPMS_DIR}/standalone/configuration/standalone.xml 
+cp -f ${OPENSHIFT_BPMS_DIR}/template/${OPENSHIFT_BPMS_CONFIG_PATH}/standalone.xml ${OPENSHIFT_BPMS_DIR}/standalone/configuration/standalone.xml 
+ln -s ${OPENSHIFT_BPMS_DIR}/template/${OPENSHIFT_BPMS_CONFIG_PATH}/settings.xml ${OPENSHIFT_BPMS_M2_REPO}/settings.xml
 
 ln -s ${OPENSHIFT_BPMS_DIR}/versions/${version}/standalone/deployments/dashbuilder.war ${OPENSHIFT_BPMS_DIR}/standalone/deployments/dashbuilder.war
 ln -s ${OPENSHIFT_BPMS_DIR}/versions/${version}/standalone/deployments/business-central.war ${OPENSHIFT_BPMS_DIR}/standalone/deployments/business-central.war
@@ -170,6 +171,7 @@ client_result "- You can add/modify/show/remove users and roles using the follow
 client_result "   - Users -> ${OPENSHIFT_BPMS_CONFIG_PATH}${OPENSHIFT_BPMS_USERS_FILE}"
 client_result "   - Roles -> ${OPENSHIFT_BPMS_CONFIG_PATH}${OPENSHIFT_BPMS_ROLES_FILE}"
 client_result "2.- You can modify the JBoss EAP standalone configuration file used for the BPMS application in your cartridge git repository at path ${OPENSHIFT_BPMS_CONFIG_PATH}standalone.xml"
+client_result "3.- You can modify the Maven settings configuration file used for the BPMS application in your cartridge git repository at path ${OPENSHIFT_BPMS_CONFIG_PATH}settings.xml"
 touch ${OPENSHIFT_BPMS_DIR}/env/OPENSHIFT_BPMS_CLUSTER
 touch ${OPENSHIFT_BPMS_DIR}/env/OPENSHIFT_BPMS_CLUSTER_REMOTING
 update-configuration java7

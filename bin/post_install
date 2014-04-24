@@ -9,3 +9,7 @@ rm -f "${OPENSHIFT_BPMS_DIR}/standalone/configuration/${OPENSHIFT_BPMS_USERS_FIL
 rm -f "${OPENSHIFT_BPMS_DIR}/standalone/configuration/${OPENSHIFT_BPMS_ROLES_FILE}"
 ln -s "${OPENSHIFT_REPO_DIR}/${OPENSHIFT_BPMS_CONFIG_PATH}/${OPENSHIFT_BPMS_USERS_FILE}" "${OPENSHIFT_BPMS_DIR}/standalone/configuration/${OPENSHIFT_BPMS_USERS_FILE}"
 ln -s "${OPENSHIFT_REPO_DIR}/${OPENSHIFT_BPMS_CONFIG_PATH}/${OPENSHIFT_BPMS_ROLES_FILE}" "${OPENSHIFT_BPMS_DIR}/standalone/configuration/${OPENSHIFT_BPMS_ROLES_FILE}"
+
+# Once the developer git repository (located at ${OPENSHIFT_REPO_DIR}) is initialized, add symlinks of the maven settings.xml file in developer repository to <M2_REPO>/settings.xml
+rm -f "${OPENSHIFT_BPMS_M2_REPO}/settings.xml"
+ln -s "${OPENSHIFT_REPO_DIR}/${OPENSHIFT_BPMS_CONFIG_PATH}/settings.xml" "${OPENSHIFT_BPMS_M2_REPO}/settings.xml"

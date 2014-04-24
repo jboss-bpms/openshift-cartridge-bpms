@@ -225,11 +225,7 @@ function build() {
   echo "Building $cartridge_type cartridge"
 
   CONFIG_DIR="${OPENSHIFT_BPMS_DIR}/standalone/configuration"
-  OPENSHIFT_MAVEN_MIRROR="${CONFIG_DIR}/settings.base.xml"
-  if $(echo $OPENSHIFT_GEAR_DNS | egrep -qe "\.rhcloud\.com")
-  then
-      OPENSHIFT_MAVEN_MIRROR="${CONFIG_DIR}/settings.rhcloud.xml"
-  fi
+  OPENSHIFT_MAVEN_MIRROR="${OPENSHIFT_BPMS_M2_REPO}/settings.xml"
 
   max_memory_mb=${OPENSHIFT_GEAR_MEMORY_MB}
 
@@ -258,7 +254,7 @@ function build() {
       if force_clean_build_enabled_for_latest_deployment
       then
           echo "Force-clean build is enabled. Removing Maven dependencies." 1>&2
-          rm -rf ${OPENSHIFT_HOMEDIR}.m2/* ${OPENSHIFT_HOMEDIR}.m2/.[^.]*
+          rm -rf ${OPENSHIFT_BPMS_M2_REPO}/repository/* ${OPENSHIFT_BPMS_M2_REPO}/repository/.[^.]*
       fi
 
       if [ -f ${OPENSHIFT_REPO_DIR}pom.xml ] && ! marker_present skip_maven_build
@@ -270,7 +266,7 @@ function build() {
           fi
 
           if [ -z "$MAVEN_ARGS" ]; then
-            export MAVEN_ARGS="clean package -Popenshift -DskipTests"
+            export MAVEN_ARGS="clean install -Popenshift -DskipTests"
           fi
 
           echo "Found pom.xml... attempting to build with 'mvn -e ${MAVEN_ARGS}'"
@@ -459,6 +455,7 @@ function check_config_files() {
     STANDALONE_FILE_PATH=${OPENSHIFT_REPO_DIR}/${OPENSHIFT_BPMS_CONFIG_PATH}/standalone.xml
     BPMS_USERS_FILE_PATH=${OPENSHIFT_REPO_DIR}/${OPENSHIFT_BPMS_CONFIG_PATH}/${OPENSHIFT_BPMS_USERS_FILE}
     BPMS_ROLES_FILE_PATH=${OPENSHIFT_REPO_DIR}/${OPENSHIFT_BPMS_CONFIG_PATH}/${OPENSHIFT_BPMS_ROLES_FILE}
+    SETTINGS_FILE_PATH=${OPENSHIFT_BPMS_M2_REPO}/settings.xml
     
     # Check standalone configuration file is present in cartridge git repo.
     check_config_file $STANDALONE_FILE_PATH
@@ -468,6 +465,9 @@ function check_config_files() {
         
     # Check roles config file is present in cartridge git repo.
     check_config_file $BPMS_ROLES_FILE_PATH
+    
+    # Check settings.xml config file is present in cartridge git repo.
+    check_config_file $SETTINGS_FILE_PATH
 }
 
 function check_config_file() {

@@ -94,8 +94,25 @@ When you install the cartridge, several users and roles are created. Their passw
 **Manage JBoss EAP configuration**
 
 * The main configuration file for JBoss EAP is <code>standalone.xml</code>
-* This file is available in in your cartridge repository at location <code>.openshift/config/standalone.xml</code>
+* This file is available in your cartridge repository at location <code>.openshift/config/standalone.xml</code>
 * Usefull for changing container configurations such as root logger level and so on
+
+**Manage Maven configuration**
+
+* There are two maven process builds involved in this cartridge:     
+1.- Maven build for the developer cartridge git repository maven project     
+    Build performed when pushing data into the cartridge git repository     
+2.- Maven build for the BPMS webapp projects    
+    Build performed when user hints <code>Build&Deploy</code> button in BPMS application     
+
+* Both maven processes uses same Maven settings file available in your cartridge repository at location  <code>.openshift/config/settings.xml</code>
+* User can use this Maven settings file to take control of the configuration for Maven builds, such as adding or removing external repositories. 
+
+**Manage welcome root JBoss EAP web application**
+
+* The developer cartridge git repository maven project generates a WAR artifact that is used as <code>welcome-root</code> webapp for the application URL.
+* You can modify this application and when running a <code>git push</code> in your cartridge git repository, it is built and re-deployed in JBoss EAP.
+* The generated WAR artifact is installed in the cartridge local repository, so it can be used as a Maven dependency too.
 
 **Clone Git repositories from the web application**
 

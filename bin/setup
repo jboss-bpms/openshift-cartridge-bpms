@@ -6,7 +6,7 @@ case "$1" in
 esac
 
 # Create additional directories required by BPMS
-mkdir -p ${OPENSHIFT_HOMEDIR}/.m2
+mkdir -p ${OPENSHIFT_BPMS_M2_REPO}
 mkdir -p ${OPENSHIFT_BPMS_DIR}/{template,standalone/tmp,standalone/deployments,standalone/configuration,standalone/log,standalone/data,modules_ext/org,jboss}
 
 # Copy the version specific files up to BPMS directory
