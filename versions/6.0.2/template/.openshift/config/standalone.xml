@@ -391,7 +391,7 @@
             <jpa default-datasource="" default-extended-persistence-inheritance="DEEP"/>
         </subsystem>
         <!-- subsystem xmlns="urn:jboss:domain:jsf:1.0"/ -->
-        <subsystem xmlns="urn:jboss:domain:jsr77:1.0"/>
+        <!--subsystem xmlns="urn:jboss:domain:jsr77:1.0"/-->
         <subsystem xmlns="urn:jboss:domain:mail:1.1">
             <mail-session jndi-name="java:jboss/mail/Default">
                 <smtp-server outbound-socket-binding-ref="mail-smtp"/>
