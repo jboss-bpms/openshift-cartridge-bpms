@@ -1,0 +1,32 @@
+Manifest-Version: 1.0
+Build-Timestamp: Thu, 19 Jun 2014 22:08:44 -0400
+Implementation-Title: KIE JBoss EAP integration - BPMS distribution
+Implementation-Version: 6.0.3-redhat-4
+Os-Version: 2.6.32-431.17.1.el6.x86_64
+Built-By: mockbuild
+Specification-Vendor: JBoss by Red Hat
+Created-By: Apache Maven
+Os-Name: Linux
+Implementation-URL: http://www.jboss.org/jboss-integration-platform-pa
+ rent/ip-parent/kie-parent-metadata/kie-parent-with-dependencies/kie-w
+ b-distributions/kie-eap-integration/kie-eap-integration-distributions
+ /kie-eap-integration-bpms
+Java-Vendor: Oracle Corporation
+Implementation-Vendor: JBoss by Red Hat
+Scm-Revision: 1c15541780da2c288926192a05cea13a9dca3fc5
+Implementation-Vendor-Id: org.kie
+Scm-Url: http://github.com/jboss/jboss-parent-pom/jboss-integration-pl
+ atform-parent/ip-parent/kie-parent-metadata/kie-parent-with-dependenc
+ ies/kie-wb-distributions/kie-eap-integration/kie-eap-integration-dist
+ ributions/kie-eap-integration-bpms
+Build-Jdk: 1.7.0_55
+Java-Version: 1.7.0_55
+Scm-Connection: scm:git:git@github.com:jboss/jboss-parent-pom.git/jbos
+ s-integration-platform-parent/ip-parent/kie-parent-metadata/kie-paren
+ t-with-dependencies/kie-wb-distributions/kie-eap-integration/kie-eap-
+ integration-distributions/kie-eap-integration-bpms
+Os-Arch: amd64
+Specification-Title: KIE JBoss EAP integration - BPMS distribution
+Specification-Version: 6.0.3-redhat-4
+Archiver-Version: Plexus Archiver
+
